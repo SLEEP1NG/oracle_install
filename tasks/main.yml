@@ -9,11 +9,11 @@
 - name: ensure the hostname entry exist in /etc/hosts
   lineinfile:
     path: /etc/hosts
-    regexp: "^{{ ansible_host }}"
-    line: "{{ ansible_host }} {{inventory_hostname}}"
+    regexp: "^{{ ansible_facts.eth0.ipv4.address }}"
+    line: "{{ ansible_facts.eth0.ipv4.address }} {{ansible_hostname}}"
 
 - name: set the hostname
-  hostname: name="{{ inventory_hostname }}"
+  hostname: name="{{ ansible_hostname }}"
 
 - name: check for the pv for oravg
   stat: path="{{ oracle_pv }}"
@@ -23,6 +23,8 @@
 
 - include: filesystems.yml
   when: pv.stat.isblk is defined
+
+- include: installdir.yml
 
 #- name: check enough free space to continue 
 #  assert:
@@ -72,3 +74,5 @@
 - include: prep_rsp_file.yml
 
 - include: oracle.yml
+
+- include: startonboot.yml
