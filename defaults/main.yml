@@ -42,6 +42,10 @@ oracle_storage_type: FILE_SYSTEM_STORAGE
 
 oracle_installer_path: /Users/kosala/software
 
+# The oracle_installer_path is remote (true or false)
+oracle_installer_path_is_remote: true
+
+
 # array  os images avaialbe
 oracle_images:
     - { image: "{{ oracle_installer_path }}/linux.x64_11gR2_database_1of2.zip", version: "11.2.0.1" }
