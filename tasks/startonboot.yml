@@ -24,4 +24,4 @@
         name: dbora
         state: started
       become: yes
-when: ansible_distribution_major_version == "6"
+  when: ansible_distribution_major_version == "6"
