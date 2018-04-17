@@ -7,7 +7,7 @@
   ignore_errors: yes
 
 - name: unzip installer
-  unarchive: src="{{ item.image }}" dest="{{ oracle_tmp }}" remote_src= {{ oracle_installer_path_is_remote }} keep_newer=true 
+  unarchive: src="{{ item.image }}" dest="{{ oracle_tmp }}" remote_src={{ oracle_installer_path_is_remote }} keep_newer=true 
   when: item.version == oracle_version and unzipped.stat.exists == false
   with_items: "{{ oracle_images }}"
   
