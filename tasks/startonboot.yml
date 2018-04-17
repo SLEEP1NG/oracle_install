@@ -1,0 +1,27 @@
+---
+
+- name: Setup Oracle to start on boot
+  block:
+    - name: Get dbora file
+      get_url: 
+        url: "https://gist.githubusercontent.com/chiita/906bafd11e88bea3bdfc/raw/561f8e2413b8737fe1ae3100d6287d1f215ecfd1/dbora"
+        dest: /etc/init.d/dbora
+        mode: 0755
+
+    - name: Update the dbora file with the correct Oracle Home
+      lineinfile:
+        path: /etc/init.d/dbora
+        regexp: '^export ORACLE_HOME='
+        line: 'export ORACLE_HOME={{ oracle_home }}'
+
+    - name: Enable the dbora service
+      service:
+        name: dbora
+        enabled: yes
+
+    - name: Start the dbora service
+      service:
+        name: dbora
+        state: started
+      become: yes
+when: ansible_distribution_major_version == "6"
