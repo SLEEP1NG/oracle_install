@@ -1,6 +1,6 @@
 ---
 
-- name: Setup Oracle to start on boot
+- name: Setup Oracle to start on boot (RHEL 6)
   block:
     - name: Get dbora file
       get_url: 
@@ -25,3 +25,15 @@
         state: started
       become: yes
   when: ansible_distribution_major_version == "6"
+- name: Setup Oracle to start on boot (RHEL 7)
+  block:
+    - name: Create Oracle Unit File
+      template: src=oracle-rdbms.service.j2 dest=/etc/systemd/system/oracle-rdbms.service
+    - name: Enable the Oracle service to start on boot
+      systemd:
+        daemon_reload: yes
+        enabled: yes
+        name: oracle-rdbms.service
+  tags:
+    - oracle_service
+  when: ansible_distribution_major_version == "7"

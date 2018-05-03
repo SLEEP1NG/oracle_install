@@ -1,0 +1,11 @@
+[Unit]
+Description="Oracle Autostart"
+Requires=network.target
+[Service]
+Type=forking
+Restart=no
+ExecStart={{ oracle_home }}/bin/dbstart {{ oracle_home }}
+ExecStop={{ oracle_home }}/bin/dbshut {{ oracle_home }}
+User={{ oracle_user[0].name }}
+[Install]
+WantedBy=multi-user.target
