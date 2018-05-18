@@ -1,6 +1,7 @@
 [Unit]
 Description="Oracle Autostart"
 Requires=network.target
+After=network.target
 [Service]
 Type=forking
 Restart=no
