@@ -31,7 +31,7 @@
     - { regex: oracle.install.db.config.starterdb.SID, value: "{{ oracle_db_name }}" }
     - { regex: oracle.install.db.config.starterdb.characterSet, value: "AL32UTF8" }
     - { regex: oracle.install.db.config.starterdb.memoryLimit, value: "{{ oracle_db_mem }}" }
-    - { regex: oracle.install.db.config.starterdb.memoryOption, value: "true" }
+    - { regex: oracle.install.db.config.starterdb.memoryOption, value: "false" }
     - { regex: oracle.install.db.config.starterdb.installExampleSchemas, value: "false" }
     - { regex: oracle.install.db.config.starterdb.password.ALL, value: "{{ oracle_db_syspass }}" }
     - { regex: oracle.install.db.config.starterdb.storageType, value: "{{ oracle_storage_type }}" }
