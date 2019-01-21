@@ -9,8 +9,8 @@
 - name: ensure the hostname entry exist in /etc/hosts
   lineinfile:
     path: /etc/hosts
-    regexp: "^{{ ansible_facts.eth0.ipv4.address }}"
-    line: "{{ ansible_facts.eth0.ipv4.address }} {{ansible_hostname}}"
+    regexp: "^{{ ansible_default_ipv4.address }}"
+    line: "{{ ansible_default_ipv4.address }} {{ansible_hostname}}"
 
 - name: set the hostname
   hostname: name="{{ ansible_hostname }}"
