@@ -62,9 +62,13 @@ oracle_bin_lv: orabinlv
 
 oracle_bin_fs: "{{ oracle_base }}/oracle"
 
+oracle_bin_size: 10G
+
 oracle_data_lv: oradatalv
 
-oracle_data_fs: "{{ oracle_base }}/data"
+oracle_data_fs: "{{ oracle_base }}/oradata"
+
+oracle_data_size: 19G
 
 #FSTYPE for Oracle filesystems.
 oracle_fstype: ext4
