@@ -25,8 +25,8 @@
     size: "{{ item.size }}"
     state: present
   with_items:
-    - { lv: "{{ oracle_bin_lv }}", size: 9G }
-    - { lv: "{{ oracle_data_lv }}", size: 5G }
+    - { lv: "{{ oracle_bin_lv }}", size: "{{ oracle_bin_size }}" }
+    - { lv: "{{ oracle_data_lv }}", size: "{{ oracle_data_size }}" }
 
 - name: create the oracle filesystems 
   filesystem: fstype="{{ oracle_fstype }}" dev="/dev/{{ oracle_vg }}/{{ item }}"
@@ -42,8 +42,8 @@
     owner: "{{ oracle_user[0].name }}"
     group: "{{ oracle_group[0].name }}"
   with_items:
-    - "{{ oracle_data_fs }}"
     - "{{ oracle_bin_fs }}"
+    - "{{ oracle_data_fs }}"
     
 - name: create and mount oracle filesystems fs
   mount:
@@ -54,8 +54,8 @@
         state: mounted
         fstype: "{{ oracle_fstype }}"
   with_items:
-    - { lv: "{{ oracle_data_lv }}", mountpoint: "{{ oracle_data_fs }}" }
     - { lv: "{{ oracle_bin_lv }}", mountpoint: "{{ oracle_bin_fs }}" }
+    - { lv: "{{ oracle_data_lv }}", mountpoint: "{{ oracle_data_fs }}" }
 
 - name: set the ownerships oracle bin fs
   file:
